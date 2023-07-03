@@ -24,14 +24,27 @@
       width: 180px;
       height: 180px;
     }
-    svg {
+    svg img {
       width: 100%;
       height: 100%;
+    }
+    &.loader-img {
+      img {
+        animation: rotate 1.5s normal linear infinite;
+      }
     }
   }
   .label {
     @include respond-to(tablet) {
       font-size: inherit;
     }
+  }
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

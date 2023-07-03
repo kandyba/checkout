@@ -5,6 +5,9 @@
   padding: 16px 10px;
   box-shadow: $primary-shadow;
   border-radius: 8px;
+  @include respond-to(tablet) {
+    padding: 32px 24px;
+  }
   .payment-header-label {
     margin-bottom: 24px;
   }

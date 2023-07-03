@@ -438,7 +438,7 @@
       <p class="payment-header-label">Payment confirmation:</p>
       <div class="payment-confirmation-row">
         <label class="label-small">Enter receipt number (optional)</label>
-        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false }">
+        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false, invalid: false }">
           <input
             type="text"
             class="custom-input"
@@ -446,6 +446,7 @@
             @focus="isActive = true"
             @blur="isActive = false"
           />
+          <p class="error-label" x-show="invalid === true">error message</p>
           <div class="icon-wrapper">
             <button
               type="button"
@@ -455,6 +456,7 @@
             >
             </button>
             <i class="icon-check" x-show="valid === true"></i>
+            <i class="icon-error" x-show="invalid === true"></i>
           </div>
         </div>
       </div>
@@ -475,7 +477,7 @@
       </div>
       <div class="payment-confirmation-row">
         <label class="label-small">Enter receipt number (optional)</label>
-        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false }">
+        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false, invalid: false }">
           <input
             type="text"
             class="custom-input"
@@ -483,6 +485,7 @@
             @focus="isActive = true"
             @blur="isActive = false"
           />
+          <p class="error-label" x-show="invalid === true" >error message</p>
           <div class="icon-wrapper">
             <button
               type="button"
@@ -492,6 +495,7 @@
             >
             </button>
             <i class="icon-check" x-show="valid === true"></i>
+            <i class="icon-error" x-show="invalid === true"></i>
           </div>
         </div>
       </div>
@@ -500,7 +504,7 @@
     <!-- Statuses -->
     <div class="statuses" x-show="statuses === 1">
       <div class="verification" x-show="paymentVerification === 1">
-        <div class="img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none"><path fill="url(#a)" d="M163.8 90c0 40.759-33.041 73.8-73.8 73.8-40.758 0-73.8-33.041-73.8-73.8S49.242 16.2 90 16.2c40.759 0 73.8 33.041 73.8 73.8ZM42.03 90c0 26.493 21.477 47.97 47.97 47.97s47.97-21.477 47.97-47.97S116.493 42.03 90 42.03 42.03 63.507 42.03 90Z"/><defs><radialGradient id="a" cx="0" cy="0" r="1" gradientTransform="matrix(74.39043 -.88556 .88556 74.39043 90 90)" gradientUnits="userSpaceOnUse"><stop stop-color="#5DA7F5"/><stop offset="1" stop-color="#96C9FA" stop-opacity="0"/></radialGradient></defs></svg></div>
+        <div class="img loader-img"><img src="img/loader.png" alt="Loader image"></div>
         <p class="label">Payment verification</p>
       </div>
       <div class="verification" x-show="paymentConfirmed === 1">
@@ -518,7 +522,7 @@
         <button
           type="button"
           class="btn btn-secondary btn-back"
-          x-show="btnBack === 1"
+          x-show="btnBack === 1, paymentCanceled === 0"
           @click.prevent="bank = 0; paymentTab = 1; btnBack = 0; selectedMethod = '', selectedBank = '', isNextButtonDisabled = true"
         >
           Back

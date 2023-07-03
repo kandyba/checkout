@@ -122,6 +122,12 @@
       z-index: 2;
       text-indent: -9999px;
     }
+    &:hover {
+      @include respond-to(tablet) {
+        background-color: $blue-300;
+        border-color: $blue-300;
+      }
+    }
   }
 }
 .btn-dropdown {

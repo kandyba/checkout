@@ -26,5 +26,21 @@
   transition-property: border-color;
   &:focus {
     border-color: $active-input-border;
+    + p + .icon-wrapper {
+      .btn-clear {
+        opacity: .5;
+      }
+    }
   }
+  &.error {
+    border-color: $danger-default-color;
+  }
+}
+.error-label {
+  font: {
+    size: 10px;
+    weight: 400;
+  }
+  line-height: 12px;
+  color: $danger-default-color;
 }

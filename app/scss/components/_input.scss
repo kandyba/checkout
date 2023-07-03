@@ -36,16 +36,9 @@
       }
     }
   }
-  &.error {
-    border-color: $danger-default-color;
-    + .error-label {
-      display: block;
-      + .icon-wrapper {
-        .icon-error {
-          display: block;
-        }
-      }
-    }
+  &:disabled {
+    border: 1px solid $gray-200;
+    background-color: $gray-50;
   }
 }
 .error-label {
@@ -55,4 +48,15 @@
   }
   line-height: 12px;
   color: $danger-default-color;
+}
+.form-group {
+  &.error-state {
+    .custom-input {
+      border-color: $danger-default-color;
+    }
+    .error-label,
+    .icon-error {
+      display: block;
+    }
+  }
 }

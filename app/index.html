@@ -161,40 +161,58 @@
           <div class="payment-amount-wrapper">
             <div class="payment-header-label">Payment amount</div>
             <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
-              <input x-model="inputAmount" />
+              <input type="text" x-model="inputAmount" />
               <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
             </div>
           </div>
         </div>
         <div class="payment-details-main">
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">IBAN</label>
             <div class="input-copy" x-data="{ inputTransferIban: 'UA00000000000000000000000000000001' }">
               <input
+                      disabled
+                      class="custom-input"
+                      type="text"
                       x-model="inputTransferIban"
                       x-data="{ resize: () => { $el.style.height = '5px'; $el.style.height = $el.scrollHeight + 'px' } }"
               />
               <button class="btn-copy" type="button" @click="$clipboard(inputTransferIban)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Account holder name</label>
             <div class="input-copy" x-data="{ inputTransferName: 'GHN0000000' }">
-              <input x-model="inputTransferName" />
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputTransferName"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputTransferName)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Individual Tax Number</label>
             <div class="input-copy" x-data="{ inputTransferTaxNumber: '00000000000' }">
-              <input x-model="inputTransferTaxNumber" />
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputTransferTaxNumber"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputTransferTaxNumber)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">MFI bank code</label>
             <div class="input-copy" x-data="{ inputTransferMfi: '0000000000' }">
-              <input x-model="inputTransferMfi" />
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputTransferMfi"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputTransferMfi)"></button>
             </div>
           </div>
@@ -206,23 +224,33 @@
           <div class="payment-amount-wrapper">
             <div class="payment-header-label">Payment amount</div>
             <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
-              <input x-model="inputAmount"/>
+              <input type="text" x-model="inputAmount"/>
               <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
             </div>
           </div>
         </div>
         <div class="payment-details-main">
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Card number</label>
-            <div class="input-copy" x-data="{ inputCardNumber: '00000 0000 0000 0000' }">
-              <input x-model="inputCardNumber"/>
+            <div class="input-copy" x-data="{ inputCardNumber: '0000000000000000' }">
+              <input
+                      disabled
+                      class="custom-input"
+                      type="number"
+                      x-model="inputCardNumber"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputCardNumber)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Name card</label>
             <div class="input-copy" x-data="{ inputCardName: 'Name' }">
-              <input x-model="inputCardName"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputCardName"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputCardName)"></button>
             </div>
           </div>
@@ -234,58 +262,93 @@
           <div class="payment-amount-wrapper">
             <div class="payment-header-label">Payment amount</div>
             <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
-              <input x-model="inputAmount" />
+              <input type="text" x-model="inputAmount" />
               <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
             </div>
           </div>
         </div>
         <div class="payment-details-main">
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">IBAN</label>
             <div class="input-copy" x-data="{ inputSepaIban: 'UA00000000000000000000000000000000' }">
-              <input x-model="inputSepaIban"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSepaIban"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSepaIban)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <p class="label-small">BIC number</p>
             <div class="input-copy" x-data="{ inputSepaBicNum: '00000000000000' }">
-              <input x-model="inputSepaBicNum"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="number"
+                      x-model="inputSepaBicNum"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSepaBicNum)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Tex identification number</label>
             <div class="input-copy" x-data="{ inputSepaIdentificationNum: '1234567890' }">
-              <input x-model="inputSepaIdentificationNum"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="number"
+                      x-model="inputSepaIdentificationNum"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSepaIdentificationNum)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Account holder name</label>
             <div class="input-copy" x-data="{ inputSepaHolderName: 'Name' }">
-              <input x-model="inputSepaHolderName"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSepaHolderName"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSepaHolderName)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Account holder address</label>
             <div class="input-copy" x-data="{ inputSepaHolderAddress: 'Address' }">
-              <input x-model="inputSepaHolderAddress"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSepaHolderAddress"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSepaHolderAddress)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Beneficiary bank name</label>
             <div class="input-copy" x-data="{ inputSepaBankName: 'UNIVERSAL BANK' }">
-              <input x-model="inputSepaBankName"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSepaBankName"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSepaBankName)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Beneficiary bank address</label>
             <div class="input-copy" x-data="{ inputSepaBankAddress: 'Address' }">
-              <input x-model="inputSepaBankAddress"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSepaBankAddress"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSepaBankAddress)"></button>
             </div>
           </div>
@@ -297,93 +360,153 @@
           <div class="payment-amount-wrapper">
             <div class="payment-header-label">Payment amount</div>
             <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
-              <input x-model="inputAmount"/>
+              <input type="text" x-model="inputAmount"/>
               <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
             </div>
           </div>
         </div>
         <div class="payment-details-main">
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">IBAN</label>
             <div class="input-copy" x-data="{ inputSwiftIban: 'UA00000000000000000000000000000000' }">
-              <input x-model="inputSwiftIban" />
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSwiftIban"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftIban)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Account number</label>
             <div class="input-copy" x-data="{ inputSwiftAccNum: '00000000000000' }">
-              <input x-model="inputSwiftAccNum"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="number"
+                      x-model="inputSwiftAccNum"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftAccNum)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <p class="label-small">Tex identification number</p>
             <div class="input-copy" x-data="{ inputSwiftIdentificationNum: '1234567890' }">
-              <input x-model="inputSwiftIdentificationNum"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="number"
+                      x-model="inputSwiftIdentificationNum"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftIdentificationNum)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Account holder name</label>
             <div class="input-copy" x-data="{ inputSwiftHolderName: 'Name' }">
-              <input x-model="inputSwiftHolderName"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSwiftHolderName"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftHolderName)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Account holder address</label>
             <div class="input-copy" x-data="{ inputSwiftHolderAddress: 'Address' }">
-              <input x-model="inputSwiftHolderAddress"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSwiftHolderAddress"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftHolderAddress)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Beneficiary bank SWIFT code</label>
             <div class="input-copy" x-data="{ inputSwiftBankCode: 'UNJSUAAAAAA' }">
-              <input x-model="inputSwiftBankCode"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSwiftBankCode"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftBankCode)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Beneficiary bank name</label>
             <div class="input-copy" x-data="{ inputSwiftBankName: 'UNIVERSAL BANK' }">
-              <input x-model="inputSwiftBankName"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSwiftBankName"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftBankName)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Beneficiary bank address</label>
             <div class="input-copy" x-data="{ inputSwiftBankAddress: 'Address' }">
-              <input x-model="inputSwiftBankAddress"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSwiftBankAddress"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftBankAddress)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Correspondent bank account number</label>
             <div class="input-copy" x-data="{ inputSwiftCorrBankNumber: '00000000000' }">
-              <input x-model="inputSwiftCorrBankNumber"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="number"
+                      x-model="inputSwiftCorrBankNumber"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftCorrBankNumber)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Correspondent SWIFT code</label>
             <div class="input-copy" x-data="{ inputSwiftCorrCode: 'UNJSUAAAAAA' }">
-              <input x-model="inputSwiftCorrCode"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSwiftCorrCode"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftCorrCode)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Correspondent bank name</label>
             <div class="input-copy" x-data="{ inputSwiftCorrBankName: 'UNIVERSAL BANK' }">
-              <input x-model="inputSwiftCorrBankName"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSwiftCorrBankName"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftCorrBankName)"></button>
             </div>
           </div>
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Correspondent bank address</label>
             <div class="input-copy" x-data="{ inputSwiftCorrBankAddress: 'UNIVERSAL BANK' }">
-              <input x-model="inputSwiftCorrBankAddress"/>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="text"
+                      x-model="inputSwiftCorrBankAddress"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputSwiftCorrBankAddress)"></button>
             </div>
           </div>
@@ -395,16 +518,22 @@
           <div class="payment-amount-wrapper">
             <div class="payment-header-label">Payment amount</div>
             <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
-              <input x-model="inputAmount"/>
+              <input type="text" x-model="inputAmount"/>
               <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
             </div>
           </div>
         </div>
         <div class="payment-details-main">
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">Phone number</label>
             <div class="input-copy input-icon-first icon-first-phone" x-data="{ inputMobileNum: '+38 000 000 00 00' }">
-              <input x-model="inputMobileNum"/>
+              <i class="icon-phone icon-first"></i>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="tel"
+                      x-model="inputMobileNum"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputMobileNum)"></button>
             </div>
           </div>
@@ -416,16 +545,22 @@
           <div class="payment-amount-wrapper">
             <div class="payment-header-label">Payment amount</div>
             <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
-              <input x-model="inputAmount"/>
+              <input type="text" x-model="inputAmount" />
               <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
             </div>
           </div>
         </div>
         <div class="payment-details-main">
-          <div class="payment-details-item">
+          <div class="form-group">
             <label class="label-small">E-mail address</label>
             <div class="input-copy input-icon-first icon-first-email" x-data="{ inputPaypalAddress: 'p2p@gmail.com' }">
-              <input x-model="inputPaypalAddress"/>
+              <i class="icon-email icon-first"></i>
+              <input
+                      disabled
+                      class="custom-input"
+                      type="email"
+                      x-model="inputPaypalAddress"
+              />
               <button class="btn-copy" type="button" @click="$clipboard(inputPaypalAddress)"></button>
             </div>
           </div>
@@ -436,7 +571,7 @@
     <!--  Payment confirmation-->
     <div class="payment-confirmation" x-show="wizardSteps.startIndex === 2">
       <p class="payment-header-label">Payment confirmation:</p>
-      <div class="payment-confirmation-row">
+      <div class="form-group">
         <label class="label-small">Enter receipt number (optional)</label>
         <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false }">
           <input
@@ -460,7 +595,7 @@
           </div>
         </div>
       </div>
-      <div class="payment-confirmation-row">
+      <div class="form-group">
         <label class="label-small">Attach receipt</label>
         <div class="attachment-wrapper" x-data="{ input: '', isActive: false, files: null }">
           <p class="custom-input" x-text="files ? files.map(file => file.name).join(', ') : ''"></p>
@@ -475,7 +610,7 @@
           </div>
         </div>
       </div>
-      <div class="payment-confirmation-row">
+      <div class="form-group">
         <label class="label-small">Enter receipt number (optional)</label>
         <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false }">
           <input

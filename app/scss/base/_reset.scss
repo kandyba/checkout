@@ -160,18 +160,3 @@ td, th {
   clear: both;
   content: '';
   display: block; }
-
-::-moz-selection {
-  background: #ffcc48;
-  color: #181f23;
-  /* Safari */ }
-
-::selection {
-  background: #ffcc48;
-  color: #181f23;
-  /* Safari */ }
-
-::-moz-selection {
-  background: #ffcc48;
-  color: #181f23;
-  /* Firefox */ }

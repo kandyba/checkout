@@ -11,9 +11,12 @@
   .payment-header-label {
     margin-bottom: 24px;
   }
-  .payment-confirmation-row {
+  .form-group {
     &:not(:last-child) {
       margin-bottom: 8px;
+      @include respond-to(tablet) {
+        margin-bottom: 24px;
+      }
     }
   }
   .attachment-wrapper {

@@ -1,0 +1,58 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.checkout-tabs {
+  padding: 24px 10px 16px;
+  box-shadow: $primary-shadow;
+  border-radius: 8px;
+  @include respond-to(tablet) {
+    padding-top: 16px;
+    padding-bottom: 32px;
+  }
+}
+.tabs-nav {
+  display: flex;
+  margin-bottom: 22px;
+  gap: 16px;
+  @include respond-to(tablet) {
+    max-width: 404px;
+    gap: 24px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+.tab-nav-btn {
+  width: 100%;
+  padding: 8px 10px;
+  color: $gray-200;
+  white-space: nowrap;
+  font: {
+    size: 12px;
+    weight: 600;
+  };
+  @include respond-to(tablet) {
+    padding-bottom: 16px;
+    font: {
+      size: 18px;
+      weight: 500;
+    }
+  }
+  &.active {
+    color: $primary-text-color;
+    &:after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+}
+.inner-tab {
+  .label-small {
+    color: $text-label;
+    @include respond-to(tablet) {
+      display: block;
+      max-width: 404px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

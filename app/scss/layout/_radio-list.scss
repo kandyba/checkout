@@ -1,0 +1,17 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.radio-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-gap: 8px;
+  margin-top: 8px;
+  @include respond-to(tablet) {
+    max-height: 208px;
+    margin-left: 16px;
+    margin-right: 12px;
+    padding-right: 46px;
+    padding-left: 46px;
+    grid-gap: 16px 24px;
+  }
+}

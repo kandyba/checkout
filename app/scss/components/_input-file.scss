@@ -1,0 +1,30 @@
+.attachment-wrapper {
+  .input-wrapper {
+    flex-grow: 1;
+  }
+  .custom-input {
+    height: 100%;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .input-file {
+     position: relative;
+     input[type='file'] {
+       opacity: 0;
+       position: absolute;
+       width: 0;
+       height: 0;
+       visibility: hidden;
+     }
+     .btn {
+       display: inline-flex;
+       height: 100%;
+       align-items: center;
+     }
+    .btn-outline {
+      border-color: $blue-200;
+    }
+   }
+}

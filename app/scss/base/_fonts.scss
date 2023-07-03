@@ -1,0 +1,64 @@
+@import "theme";
+@import "../base/mixins";
+
+.label {
+  margin-bottom: 8px;
+  line-height: 24px;
+  font: {
+    size: 18px;
+    weight: 700;
+  }
+  &.label-sum {
+    @include respond-to(tablet) {
+      margin-bottom: 0;
+      line-height: 28px;
+    }
+    @include respond-to(desktop) {
+      font-weight: 500;
+    }
+  }
+}
+.label-info {
+  padding-right: 4px;
+  font: {
+    size: 12px;
+    weight: 500;
+  }
+  @include respond-to(tablet) {
+    font: {
+      size: 14px;
+      weight: 600;
+    }
+  }
+  @include respond-to(desktop) {
+    line-height: 24px;
+    font: {
+      size: 16px;
+    }
+  }
+}
+.label-small {
+  color: $text-label;
+  line-height: 12px;
+  font: {
+    size: 10px;
+    weight: 500;
+  }
+  @include respond-to(tablet) {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+.payment-header-label {
+  color: $primary-text-color;
+  line-height: 16px;
+  text-align: inherit;
+  font: {
+    size: 12px;
+    weight: 500;
+  }
+  @include respond-to(tablet) {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

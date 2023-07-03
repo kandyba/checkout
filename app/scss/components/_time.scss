@@ -1,0 +1,13 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.time {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: $gray-100;
+  min-width: 74px;
+  text-align: center;
+  @include respond-to-max(mobile-end) {
+    font-size: 12px;
+  }
+}

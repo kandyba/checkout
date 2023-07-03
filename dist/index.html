@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en" xmlns:x-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="container" x-data="getData()">
+  <header class="header">
+    <button type="button"
+            @click.prevent="cancel()"
+            x-show="paymentCanceled === 0"
+            class="btn btn-danger">Cancel</button>
+    <div class="steps-wrapper">
+      <div class="steps">
+        <span class="step-item active">Select options</span>
+        <span class="step-item disabled">Transfer funds</span>
+        <span class="step-item done">Confirm</span>
+        <div id="progress" class="progress"><span style="width: 50%"></span></div>
+      </div>
+    </div>
+    <div class="time" x-data="timer(new Date().setDate(new Date().getDate() + 1))" x-init="init();">
+      <span x-text="time().minutes"></span>:<span x-text="time().seconds"></span>
+    </div>
+  </header>
+  <main>
+    <div class="checkout-info">
+      <h1 class="checkout-info-title">Digitechnology Limited</h1>
+      <div class="invoice-wrapper checkout-info-bg-mobile">
+        <div class="invoice-sum-row">
+          <p class="label label-sum">Invoice amount</p>
+          <p class="invoice-sum">500 <span class="currency">USD</span></p>
+        </div>
+        <div class="invoice-inner checkout-info-bg-desktop">
+          <div class="invoice-row invoice-description">
+            <label class="label-info">Description</label>
+            <p>Balance replenishment</p>
+          </div>
+          <div class="invoice-row invoice-number">
+            <p class="label-info">Invoice:</p>
+            <p>c9936f35-40e2-4506-bc46-12eadd8c284e</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="checkout-payment" x-show="firstStep === 1">
+      <div class="checkout-tabs">
+        <nav class="tabs-nav">
+          <button
+            class="tab-nav-btn underline"
+            :class="{'active': paymentTab === 1}"
+            @click.prevent="paymentCurrency()"
+          >
+            Payment currency
+          </button>
+          <button class="tab-nav-btn underline"
+            :class="{'active': paymentTab === 2}"
+            disabled
+          >
+            Payment method
+          </button>
+        </nav>
+        <div x-show="paymentTab === 1">
+          <div class="radio-list custom-scrollbar">
+              <template class="d-none" x-for="сurrency in paymentList" :key="сurrency.id">
+                <div class="custom-radio">
+                  <input x-model="selectedCurrencyLabel" type="radio" :value="сurrency.label"
+                         :id="сurrency.label" />
+                  <label :for="сurrency.label"
+                         x-text="сurrency.label"
+                         @click.prevent="paymentTab = 2"
+                  ></label>
+                </div>
+              </template>
+          </div>
+        </div>
+        <div x-show="paymentTab === 2">
+          <div class="inner-tab">
+            <!-- Payment methods -->
+            <div class="radio-row">
+              <div class="custom-radio-text">
+                <input type="radio" id="transfer" value="Bank Transfer" x-model="selectedMethod" name="method" />
+                <label for="transfer" class="underline" @click="bank = 1; btnBack = 1; paymentBankTransfer = 1">
+                  Bank Transfer
+                </label>
+              </div>
+              <div class="custom-radio-text">
+                <input type="radio" id="card" value="Card" x-model="selectedMethod" name="method" />
+                <label for="card" class="underline" @click="bank = 1; btnBack= 1; paymentCard = 1">Card</label>
+              </div>
+              <div class="custom-radio-text">
+                <input type="radio" id="sepa" value="SEPA" x-model="selectedMethod" name="method" />
+                <label for="sepa" class="underline" @click="bank = 1; btnBack= 1; paymentSepa = 1">SEPA</label>
+              </div>
+              <div class="custom-radio-text">
+                <input type="radio" id="swift" value="SWIFT" x-model="selectedMethod" name="method" />
+                <label for="swift" class="underline" @click="bank = 1; btnBack= 1; paymentSwift = 1">SWIFT</label>
+              </div>
+              <div class="custom-radio-text">
+                <input type="radio" id="mobile" value="Mobile" x-model="selectedMethod" name="method" />
+                <label for="mobile" class="underline" @click="bank = 1; btnBack= 1; paymentMobile = 1">Mobile</label>
+              </div>
+              <div class="custom-radio-text">
+                <input type="radio" id="paypal" value="PayPal" x-model="selectedMethod" name="method" />
+                <label for="paypal" class="underline" @click="bank = 1; btnBack= 1; paymentPayPal = 1">PayPal</label>
+              </div>
+            </div>
+            <!-- End of payment methods -->
+            <!-- Banks section -->
+            <div x-show="bank === 1">
+              <label class="label-small">Select bank:</label>
+              <div class="radio-list">
+                <div class="custom-radio">
+                  <input type="radio" id="monoBank" value="MonoBank" x-model="selectedBank" name="bank" />
+                  <label for="monoBank" @click="isNextButtonDisabled = false">MonoBank</label>
+                </div>
+                <div class="custom-radio">
+                  <input type="radio" id="privatbank" value="Privatbank" x-model="selectedBank" name="bank" />
+                  <label for="privatbank" @click="isNextButtonDisabled = false">Privatbank</label>
+                </div>
+                <div class="custom-radio">
+                  <input type="radio" id="pumb" value="Pumb" x-model="selectedBank" name="bank" />
+                  <label for="pumb" @click="isNextButtonDisabled = false">Pumb</label>
+                </div>
+                <div class="custom-radio">
+                  <input type="radio" id="otp" value="OTP" x-model="selectedBank" name="bank" />
+                  <label for="otp" @click="isNextButtonDisabled = false">OTP</label>
+                </div>
+                <div class="custom-radio">
+                  <input type="radio" id="izi" value="IZI bank" x-model="selectedBank" name="bank" />
+                  <label for="izi" @click="isNextButtonDisabled = false">IZI bank</label>
+                </div>
+                <div class="custom-radio">
+                  <input type="radio" id="sence" value="Sence bank" x-model="selectedBank" name="bank" />
+                  <label for="sence" @click="isNextButtonDisabled = false">Sence bank</label>
+                </div>
+                <div class="custom-radio">
+                  <input type="radio" id="bvr" value="BVR" x-model="selectedBank" name="bank" />
+                  <label for="bvr" @click="isNextButtonDisabled = false">BVR</label>
+                </div>
+                <div class="custom-radio">
+                  <input type="radio" id="oshchad" value="Oshchad" x-model="selectedBank" name="bank" />
+                  <label for="oshchad" @click="isNextButtonDisabled = false">Oshchad</label>
+                </div>
+              </div>
+            </div>
+            <!-- End of banks section -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Payment details -->
+    <div x-show="paymentDetails === 1" class="payment-details-wrapper">
+      <div class="payment-details" x-show="paymentBankTransfer === 1">
+        <div class="payment-details-header">
+          <div class="payment-header-label">Payment details:</div>
+          <div class="payment-amount-wrapper">
+            <div class="payment-header-label">Payment amount</div>
+            <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
+              <input x-model="inputAmount" />
+              <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
+            </div>
+          </div>
+        </div>
+        <div class="payment-details-main">
+          <div class="payment-details-item">
+            <label class="label-small">IBAN</label>
+            <div class="input-copy" x-data="{ inputTransferIban: 'UA00000000000000000000000000000001' }">
+              <input
+                      x-model="inputTransferIban"
+                      x-data="{ resize: () => { $el.style.height = '5px'; $el.style.height = $el.scrollHeight + 'px' } }"
+              />
+              <button class="btn-copy" type="button" @click="$clipboard(inputTransferIban)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Account holder name</label>
+            <div class="input-copy" x-data="{ inputTransferName: 'GHN0000000' }">
+              <input x-model="inputTransferName" />
+              <button class="btn-copy" type="button" @click="$clipboard(inputTransferName)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Individual Tax Number</label>
+            <div class="input-copy" x-data="{ inputTransferTaxNumber: '00000000000' }">
+              <input x-model="inputTransferTaxNumber" />
+              <button class="btn-copy" type="button" @click="$clipboard(inputTransferTaxNumber)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">MFI bank code</label>
+            <div class="input-copy" x-data="{ inputTransferMfi: '0000000000' }">
+              <input x-model="inputTransferMfi" />
+              <button class="btn-copy" type="button" @click="$clipboard(inputTransferMfi)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="payment-details" x-show="paymentCard === 1">
+        <div class="payment-details-header">
+          <div class="payment-header-label">Payment details:</div>
+          <div class="payment-amount-wrapper">
+            <div class="payment-header-label">Payment amount</div>
+            <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
+              <input x-model="inputAmount"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
+            </div>
+          </div>
+        </div>
+        <div class="payment-details-main">
+          <div class="payment-details-item">
+            <label class="label-small">Card number</label>
+            <div class="input-copy" x-data="{ inputCardNumber: '00000 0000 0000 0000' }">
+              <input x-model="inputCardNumber"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputCardNumber)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Name card</label>
+            <div class="input-copy" x-data="{ inputCardName: 'Name' }">
+              <input x-model="inputCardName"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputCardName)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="payment-details" x-show="paymentSepa === 1">
+        <div class="payment-details-header">
+          <div class="payment-header-label">Payment details:</div>
+          <div class="payment-amount-wrapper">
+            <div class="payment-header-label">Payment amount</div>
+            <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
+              <input x-model="inputAmount" />
+              <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
+            </div>
+          </div>
+        </div>
+        <div class="payment-details-main">
+          <div class="payment-details-item">
+            <label class="label-small">IBAN</label>
+            <div class="input-copy" x-data="{ inputSepaIban: 'UA00000000000000000000000000000000' }">
+              <input x-model="inputSepaIban"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSepaIban)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <p class="label-small">BIC number</p>
+            <div class="input-copy" x-data="{ inputSepaBicNum: '00000000000000' }">
+              <input x-model="inputSepaBicNum"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSepaBicNum)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Tex identification number</label>
+            <div class="input-copy" x-data="{ inputSepaIdentificationNum: '1234567890' }">
+              <input x-model="inputSepaIdentificationNum"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSepaIdentificationNum)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Account holder name</label>
+            <div class="input-copy" x-data="{ inputSepaHolderName: 'Name' }">
+              <input x-model="inputSepaHolderName"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSepaHolderName)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Account holder address</label>
+            <div class="input-copy" x-data="{ inputSepaHolderAddress: 'Address' }">
+              <input x-model="inputSepaHolderAddress"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSepaHolderAddress)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Beneficiary bank name</label>
+            <div class="input-copy" x-data="{ inputSepaBankName: 'UNIVERSAL BANK' }">
+              <input x-model="inputSepaBankName"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSepaBankName)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Beneficiary bank address</label>
+            <div class="input-copy" x-data="{ inputSepaBankAddress: 'Address' }">
+              <input x-model="inputSepaBankAddress"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSepaBankAddress)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="payment-details" x-show="paymentSwift === 1">
+        <div class="payment-details-header">
+          <div class="payment-header-label">Payment details:</div>
+          <div class="payment-amount-wrapper">
+            <div class="payment-header-label">Payment amount</div>
+            <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
+              <input x-model="inputAmount"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
+            </div>
+          </div>
+        </div>
+        <div class="payment-details-main">
+          <div class="payment-details-item">
+            <label class="label-small">IBAN</label>
+            <div class="input-copy" x-data="{ inputSwiftIban: 'UA00000000000000000000000000000000' }">
+              <input x-model="inputSwiftIban" />
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftIban)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Account number</label>
+            <div class="input-copy" x-data="{ inputSwiftAccNum: '00000000000000' }">
+              <input x-model="inputSwiftAccNum"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftAccNum)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <p class="label-small">Tex identification number</p>
+            <div class="input-copy" x-data="{ inputSwiftIdentificationNum: '1234567890' }">
+              <input x-model="inputSwiftIdentificationNum"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftIdentificationNum)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Account holder name</label>
+            <div class="input-copy" x-data="{ inputSwiftHolderName: 'Name' }">
+              <input x-model="inputSwiftHolderName"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftHolderName)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Account holder address</label>
+            <div class="input-copy" x-data="{ inputSwiftHolderAddress: 'Address' }">
+              <input x-model="inputSwiftHolderAddress"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftHolderAddress)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Beneficiary bank SWIFT code</label>
+            <div class="input-copy" x-data="{ inputSwiftBankCode: 'UNJSUAAAAAA' }">
+              <input x-model="inputSwiftBankCode"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftBankCode)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Beneficiary bank name</label>
+            <div class="input-copy" x-data="{ inputSwiftBankName: 'UNIVERSAL BANK' }">
+              <input x-model="inputSwiftBankName"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftBankName)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Beneficiary bank address</label>
+            <div class="input-copy" x-data="{ inputSwiftBankAddress: 'Address' }">
+              <input x-model="inputSwiftBankAddress"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftBankAddress)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Correspondent bank account number</label>
+            <div class="input-copy" x-data="{ inputSwiftCorrBankNumber: '00000000000' }">
+              <input x-model="inputSwiftCorrBankNumber"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftCorrBankNumber)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Correspondent SWIFT code</label>
+            <div class="input-copy" x-data="{ inputSwiftCorrCode: 'UNJSUAAAAAA' }">
+              <input x-model="inputSwiftCorrCode"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftCorrCode)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Correspondent bank name</label>
+            <div class="input-copy" x-data="{ inputSwiftCorrBankName: 'UNIVERSAL BANK' }">
+              <input x-model="inputSwiftCorrBankName"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftCorrBankName)"></button>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <label class="label-small">Correspondent bank address</label>
+            <div class="input-copy" x-data="{ inputSwiftCorrBankAddress: 'UNIVERSAL BANK' }">
+              <input x-model="inputSwiftCorrBankAddress"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputSwiftCorrBankAddress)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="payment-details" x-show="paymentMobile === 1">
+        <div class="payment-details-header">
+          <div class="payment-header-label">Payment details:</div>
+          <div class="payment-amount-wrapper">
+            <div class="payment-header-label">Payment amount</div>
+            <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
+              <input x-model="inputAmount"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
+            </div>
+          </div>
+        </div>
+        <div class="payment-details-main">
+          <div class="payment-details-item">
+            <label class="label-small">Phone number</label>
+            <div class="input-copy input-icon-first icon-first-phone" x-data="{ inputMobileNum: '+38 000 000 00 00' }">
+              <input x-model="inputMobileNum"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputMobileNum)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="payment-details" x-show="paymentPayPal === 1">
+        <div class="payment-details-header">
+          <div class="payment-header-label">Payment details:</div>
+          <div class="payment-amount-wrapper">
+            <div class="payment-header-label">Payment amount</div>
+            <div class="payment-amount" x-data="{ inputAmount: '19250 UAH' }">
+              <input x-model="inputAmount"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputAmount)"></button>
+            </div>
+          </div>
+        </div>
+        <div class="payment-details-main">
+          <div class="payment-details-item">
+            <label class="label-small">E-mail address</label>
+            <div class="input-copy input-icon-first icon-first-email" x-data="{ inputPaypalAddress: 'p2p@gmail.com' }">
+              <input x-model="inputPaypalAddress"/>
+              <button class="btn-copy" type="button" @click="$clipboard(inputPaypalAddress)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of payment details -->
+    <!--  Payment confirmation-->
+    <div class="payment-confirmation" x-show="wizardSteps.startIndex === 2">
+      <p class="payment-header-label">Payment confirmation:</p>
+      <div class="payment-confirmation-row">
+        <label class="label-small">Enter receipt number (optional)</label>
+        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false }">
+          <input
+            type="text"
+            class="custom-input"
+            x-model="input"
+            @focus="isActive = true"
+            @blur="isActive = false"
+          />
+          <div class="icon-wrapper">
+            <button
+              type="button"
+              class="btn-clear"
+              @click="input= ''"
+              x-show="input.trim().length > 0"
+            >
+            </button>
+            <i class="icon-check" x-show="valid === true"></i>
+          </div>
+        </div>
+      </div>
+      <div class="payment-confirmation-row">
+        <label class="label-small">Attach receipt</label>
+        <div class="attachment-wrapper" x-data="{ input: '', isActive: false, files: null }">
+          <p class="custom-input" x-text="files ? files.map(file => file.name).join(', ') : ''"></p>
+          <div class="input-file">
+            <input
+              type="file"
+              id="attach-receipt"
+              class="btn"
+              x-on:change="files = Object.values($event.target.files)"
+            />
+            <label for="attach-receipt" class="btn btn-outline">Upload file</label>
+          </div>
+        </div>
+      </div>
+      <div class="payment-confirmation-row">
+        <label class="label-small">Enter receipt number (optional)</label>
+        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false }">
+          <input
+            type="text"
+            class="custom-input"
+            x-model="input"
+            @focus="isActive = true"
+            @blur="isActive = false"
+          />
+          <div class="icon-wrapper">
+            <button
+              type="button"
+              class="btn-clear"
+              @click="input= ''"
+              x-show="input.trim().length > 0"
+            >
+            </button>
+            <i class="icon-check" x-show="valid === true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  End of payment confirmation-->
+    <!-- Statuses -->
+    <div class="statuses" x-show="statuses === 1">
+      <div class="verification" x-show="paymentVerification === 1">
+        <div class="img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none"><path fill="url(#a)" d="M163.8 90c0 40.759-33.041 73.8-73.8 73.8-40.758 0-73.8-33.041-73.8-73.8S49.242 16.2 90 16.2c40.759 0 73.8 33.041 73.8 73.8ZM42.03 90c0 26.493 21.477 47.97 47.97 47.97s47.97-21.477 47.97-47.97S116.493 42.03 90 42.03 42.03 63.507 42.03 90Z"/><defs><radialGradient id="a" cx="0" cy="0" r="1" gradientTransform="matrix(74.39043 -.88556 .88556 74.39043 90 90)" gradientUnits="userSpaceOnUse"><stop stop-color="#5DA7F5"/><stop offset="1" stop-color="#96C9FA" stop-opacity="0"/></radialGradient></defs></svg></div>
+        <p class="label">Payment verification</p>
+      </div>
+      <div class="verification" x-show="paymentConfirmed === 1">
+        <div class="img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none"><circle cx="90" cy="90" r="90" fill="#F0FAF0"/><circle cx="90" cy="90" r="64.737" fill="#B6E4B2"/><circle cx="90" cy="90" r="32.368" fill="#6DC965"/><path stroke="#FFFFFE" stroke-linecap="round" stroke-width="10" d="m75 93.671 13.414 13.697 37.112-37.894"/></svg></div>
+        <p class="label">Payment Confirmed</p>
+      </div>
+      <div class="verification" x-show="paymentCanceled === 1">
+        <div class="img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none"><circle cx="90" cy="90" r="90" fill="#FDF3F3"/><circle cx="90" cy="90" r="64.737" fill="#F29797"/><circle cx="90" cy="90" r="32.368" fill="#E53030"/><path stroke="#FFFFFE" stroke-linecap="round" stroke-width="10" d="M105.789 74.21 74.21 105.79m0-31.579 31.579 31.579"/></svg></div>
+        <p class="label">Canceled</p>
+      </div>
+    </div>
+    <!-- End of Statuses  -->
+    <div class="button-group">
+      <div class="button-nav">
+        <button
+          type="button"
+          class="btn btn-secondary btn-back"
+          x-show="btnBack === 1"
+          @click.prevent="bank = 0; paymentTab = 1; btnBack = 0; selectedMethod = '', selectedBank = '', isNextButtonDisabled = true"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-next"
+          x-bind:disabled="isNextButtonDisabled"
+          @click="getPaymentDetail()"
+          x-show="paymentCanceled === 0"
+        >
+          Get payment detail
+        </button>
+      </div>
+      <div class="show-more" x-data="{isOpen: false}">
+        <button type="button" class="btn btn-outline btn-dropdown" @click="isOpen = !isOpen"
+                :class="{ 'active': isOpen }">Payment rules
+        </button>
+        <div class="collapsible" :style="isOpen && {height: $el.scrollHeight+`px`}" :class="isOpen && 'is-open'">
+          <div class="inner">
+            <p>Welcome text</p>
+            <p><strong>Step 1: Select payment Options</strong></p>
+            <p>First off, you need to select currency.</p>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-outline btn-chat">Chat</button>
+    </div>
+  </main>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.x.x/dist/alpine-clipboard.js"></script>
+  <script>
+    function getData() {
+      return {
+        wizardSteps: {
+          startIndex: 0,
+          steps: [
+            {
+              name: "Select options"
+            },
+            {
+              name: "Transfer funds"
+            },
+            {
+              name: "Confirm"
+            }
+          ]
+        },
+        btnBack: 0,
+        bank: 0,
+        paymentDetails: 0,
+        paymentTab: 1,
+        methodTab: 1,
+        firstStep: 1,
+        selectedMethod: '',
+        selectedBank: '',
+        isNextButtonDisabled: true,
+        paymentBankTransfer: 0,
+        paymentCard: 0,
+        paymentSepa: 0,
+        paymentSwift: 0,
+        paymentMobile: 0,
+        paymentPayPal: 0,
+        paymentConfirmation: 0,
+        statuses: 0,
+        paymentVerification: 0,
+        paymentConfirmed: 0,
+        paymentCanceled: 0,
+        selectedCurrencyLabel: '',
+        paymentList: [
+          {
+            id: 1,
+            label: 'USD'
+          },
+          {
+            id: 2,
+            label: 'UAH'
+          },
+          {
+            id: 3,
+            label: 'EUR'
+          },
+          {
+            id: 4,
+            label: 'IDR'
+          },
+          {
+            id: 5,
+            label: 'INR'
+          },
+          {
+            id: 6,
+            label: 'PKR'
+          },
+          {
+            id: 7,
+            label: 'KZT'
+          },
+          {
+            id: 8,
+            label: 'UZS'
+          }
+        ],
+        isCurrencySelected () {
+          this.paymentTab = 2
+        },
+        cancel () {
+          this.firstStep = 0;
+          this.paymentDetails = 0;
+          this.paymentConfirmation = 0;
+          this.statuses = 1;
+          this.paymentCanceled = 1
+        },
+        getPaymentDetail () {
+          this.firstStep = 0
+          this.paymentDetails = 1
+          this.nextStep()
+        },
+        paymentCurrency () {
+          this.bank = 0;
+          this.paymentTab = 1;
+          this.btnBack = 0;
+          this.selectedMethod = '';
+          this.selectedBank = '';
+          this.isNextButtonDisabled = true
+        },
+        nextStep() {
+          if ( this.wizardSteps.startIndex < this.wizardSteps.steps.length - 1 ) {
+            this.wizardSteps.startIndex++;
+            if (this.wizardSteps.startIndex === 2) {
+              this.paymentDetails = 0
+            }
+          }
+          console.log(this.wizardSteps.startIndex);
+        },
+        prevStep() {
+          if (this.wizardSteps.startIndex > 0) {
+            this.wizardSteps.startIndex--;
+          }
+        },
+        timer(expiry) {
+          return {
+            expiry: expiry,
+            remaining:null,
+            init() {
+              this.setRemaining()
+              setInterval(() => {
+                this.setRemaining();
+              }, 1000);
+            },
+            setRemaining() {
+              const diff = this.expiry - new Date().getTime();
+              this.remaining = parseInt(diff / 1000);
+            },
+            days() {
+              return {
+                value:this.remaining / 86400,
+                remaining:this.remaining % 86400
+              };
+            },
+            hours() {
+              return {
+                value:this.days().remaining / 3600,
+                remaining:this.days().remaining % 3600
+              };
+            },
+            minutes() {
+              return {
+                value:this.hours().remaining / 60,
+                remaining:this.hours().remaining % 60
+              };
+            },
+            seconds() {
+              return {
+                value:this.minutes().remaining,
+              };
+            },
+            format(value) {
+              return ("0" + parseInt(value)).slice(-2)
+            },
+            time(){
+              return {
+                days:this.format(this.days().value),
+                hours:this.format(this.hours().value),
+                minutes:this.format(this.minutes().value),
+                seconds:this.format(this.seconds().value),
+              }
+            },
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

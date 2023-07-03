@@ -1,0 +1,30 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.input-wrapper {
+  position: relative;
+}
+.icon-wrapper {
+  position: absolute;
+  right: 16px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 20px;
+  height: 20px;
+}
+.custom-input {
+  position: relative;
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 14px;
+  line-height: 22px;
+  border: 1px solid $primary-input-border;
+  border-radius: 8px;
+  transition-duration: .25s;
+  transition-property: border-color;
+  &:focus {
+    border-color: $active-input-border;
+  }
+}

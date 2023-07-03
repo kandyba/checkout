@@ -1,0 +1,60 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.payment-details-wrapper{
+  padding: 8px 10px 16px;
+  border-radius: 8px;
+  box-shadow: $primary-shadow;
+  @include respond-to(tablet) {
+    padding: 32px 24px 42px;
+  }
+}
+.payment-details-header {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.payment-amount-wrapper {
+  padding-top: 4px;
+  text-align: right;
+}
+.payment-amount {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  gap: 8px;
+  line-height: 24px;
+  font: {
+    size: 16px;
+    weight: 600;
+  }
+  @include respond-to(tablet) {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  input {
+    width: 100%;
+    border-width: 0;
+    text-align: inherit;
+  }
+}
+.payment-details-main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  @include respond-to(tablet) {
+    margin-top: 24px;
+    gap: 24px;
+  }
+  .label-small {
+    font-size: 10px;
+    @include respond-to(tablet) {
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+}
+
+.d-none {
+  display: none !important;
+}

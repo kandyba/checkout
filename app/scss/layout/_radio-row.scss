@@ -1,0 +1,13 @@
+.radio-row {
+  display: flex;
+  margin-bottom: 16px;
+  padding: 8px 10px;
+  gap: 20px;
+  border-radius: 8px;
+  box-shadow: $primary-shadow;
+  overflow-x: auto;
+  @include respond-to(tablet) {
+    justify-content: space-between;
+    box-shadow: none;
+  }
+}

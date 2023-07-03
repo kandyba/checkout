@@ -1,0 +1,16 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 24px;
+  margin-bottom: 16px;
+  @include respond-to(tablet) {
+    margin-bottom: 100px;
+  }
+  @include respond-to(desktop) {
+    padding-top: 80px;
+  }
+}

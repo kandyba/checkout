@@ -1,0 +1,22 @@
+{
+  "name": "starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Polessky Vlad",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.27.10",
+    "cssnano": "^5.1.14",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-terser": "^2.1.0",
+    "live-server": "^1.2.2",
+    "sass": "^1.56.2"
+  }
+}

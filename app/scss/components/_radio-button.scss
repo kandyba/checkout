@@ -1,0 +1,80 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.custom-radio {
+  input[type='radio'] {
+    display: none;
+    &:checked + label {
+      &:before {
+        background-color: $blue-50;
+      }
+      &:after {
+        background-color: $blue-400;
+      }
+    }
+  }
+  label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 12px 8px;
+    border: 1px solid $blue-100;
+    border-radius: 8px;
+    line-height: 20px;
+    font: {
+      size: 14px;
+      weight: 500;
+    };
+    @include respond-to(tablet) {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-size: 16px;
+      line-height: 22px;
+    }
+    &:before, &:after {
+      content: '';
+      border-radius: 100%;
+      background-color: transparent;
+      transition-duration: .25s;
+      transition-property: background-color;
+    }
+    &:before {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      border: 1px solid $blue-100;
+    }
+    &:after {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      transform: translateY(-50%);
+    }
+  }
+}
+.custom-radio-text {
+  input[type='radio'] {
+    display: none;
+    &:checked + label {
+      color: $primary-text-color;
+      &:after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+  label {
+    display: block;
+    position: relative;
+    padding: 8px 0;
+    line-height: 1;
+    font: {
+      size: 14px;
+      weight: 500;
+    };
+    color: $gray-400;
+    white-space: nowrap;
+  }
+}

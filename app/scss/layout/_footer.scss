@@ -1,0 +1,36 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+footer {
+  -ms-flex: 0 0 auto;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  font-size: 12px;
+  .footer-nav {
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+      @include respond-to(desktop) {
+        margin-bottom: 10px;
+      }
+    }
+    .list-item {
+      margin-bottom: 20px;
+      padding-right: 12px;
+      padding-left: 12px;
+    }
+    .link {
+      &:before {
+        background-color: $yellow;
+      }
+    }
+  }
+  .copyright {
+    text-align: center;
+  }
+}

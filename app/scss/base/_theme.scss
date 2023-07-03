@@ -1,0 +1,56 @@
+$white: #fff;
+$primary-text-color: #1C3F64;
+
+$danger-default-color: #DD5368;
+$danger-hover-color: #EA828F;
+$danger-active-color: #C93553;
+
+$primary-default-color: #5DA7F5;
+$primary-hover-color: #96C9FA;
+$primary-active-color: #3D6B9C;
+
+$secondary-default-color: #B0B0B0;
+$secondary-hover-color: #D1D1D1;
+$secondary-active-color: #8C8C8C;
+
+$outline-hover-color: #EFF7FF;
+$outline-active-color: #DCEBFD;
+$outline-disabled-color: #F6F6F6;
+
+$text-label: #6D6D6D;
+
+$primary-input-border: #DAE6EB;
+$active-input-border: #8EA7BD;
+
+$scrollbar-track-color: #F6F6F6;
+$scrollbar-thumb-color: #DCEBFD;
+
+/*Blue*/
+$blue-50: #EFF7FF;
+$blue-100: #DCEBFD;
+$blue-200: #c1ddfc;
+$blue-300: #96c9fa;
+$blue-400 : #5DA7F5;
+$blue-500 : #418af0;
+$blue-900: #214087;
+
+/*Gray*/
+$gray-50: #F6F6F6;
+$gray-100: #F4F8F9;
+$gray-200: #DAE6EB;
+$gray-300: #D1D1D1;
+$gray-400: #8C8C8C;
+
+/*Shadows*/
+$primary-shadow: 0 8px 24px -1px rgba(24, 39, 75, 0.06), 0px 6px 12px -6px rgba(24, 39, 75, 0.08);
+$btn-shadow: 0 3px 5px rgba(16, 24, 40, 0.15), 0 1px 2px rgba(16, 24, 40, 0.06);
+$btn-danger-shadow: 0 3px 5px rgba(16, 24, 40, 0.07);
+
+/*Breakpoints*/
+$breakpoints: (
+  'mobile-end': 767px,
+  'tablet': 768px,
+  'tablet-end': 1023px,
+  'desktop': 1024px,
+  'desktop-xl': 1280px
+) !default;

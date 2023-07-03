@@ -1,0 +1,21 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.payment-confirmation {
+  padding: 16px 10px;
+  box-shadow: $primary-shadow;
+  border-radius: 8px;
+  .payment-header-label {
+    margin-bottom: 24px;
+  }
+  .payment-confirmation-row {
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+  .attachment-wrapper {
+    display: flex;
+    height: 40px;
+    gap: 8px;
+  }
+}

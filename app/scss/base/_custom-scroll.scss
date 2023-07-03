@@ -1,0 +1,22 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.custom-scrollbar {
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 89px;
+    &-track {
+      background-color: $scrollbar-track-color;
+    }
+    &-thumb {
+      background-color: $scrollbar-thumb-color;
+    }
+    &-track,
+    &-thumb {
+      border-radius: 12px;
+    }
+  }
+  scrollbar-width: thin;
+  scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
+}

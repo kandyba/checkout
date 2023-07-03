@@ -1,0 +1,29 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.button-group {
+  margin-top: 16px;
+  .button-nav {
+    display: flex;
+    gap: 8px;
+    @include respond-to(tablet) {
+      gap: 24px;
+    }
+  }
+  .btn-next {
+    width: 100%;
+  }
+  .btn-back {
+    width: 86px;
+    flex-shrink: 0;
+    @include respond-to(tablet) {
+      width: 172px;
+    }
+  }
+  .show-more {
+    margin-top: 16px;
+    @include respond-to-max(mobile-end) {
+      margin-bottom: 8px;
+    }
+  }
+}

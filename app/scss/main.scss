@@ -1,0 +1,32 @@
+/* Base styles */
+@import "base/reset";
+@import "base/theme";
+@import "base/mixins";
+@import "base/fonts-include";
+@import "base/fonts";
+@import "base/custom-scroll";
+
+/* General */
+@import "base/general";
+
+/* Components */
+@import "components/icons";
+@import "components/buttons";
+@import "components/steps";
+@import "components/time";
+@import "components/tabs";
+@import "components/radio-button";
+@import "components/show-more";
+@import "components/input-copy";
+@import "components/input";
+@import "components/input-file";
+
+/*Layouts*/
+@import "layout/header";
+@import "layout/checkout-info";
+@import "layout/radio-list";
+@import "layout/button-group";
+@import "layout/radio-row";
+@import "layout/payment-datails";
+@import "layout/payment-confirmation";
+@import "layout/statuses";

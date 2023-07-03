@@ -438,7 +438,7 @@
       <p class="payment-header-label">Payment confirmation:</p>
       <div class="payment-confirmation-row">
         <label class="label-small">Enter receipt number (optional)</label>
-        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false, invalid: false }">
+        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false }">
           <input
             type="text"
             class="custom-input"
@@ -446,7 +446,7 @@
             @focus="isActive = true"
             @blur="isActive = false"
           />
-          <p class="error-label" x-show="invalid === true">error message</p>
+          <p class="error-label">error message</p>
           <div class="icon-wrapper">
             <button
               type="button"
@@ -456,7 +456,7 @@
             >
             </button>
             <i class="icon-check" x-show="valid === true"></i>
-            <i class="icon-error" x-show="invalid === true"></i>
+            <i class="icon-error"></i>
           </div>
         </div>
       </div>
@@ -477,7 +477,7 @@
       </div>
       <div class="payment-confirmation-row">
         <label class="label-small">Enter receipt number (optional)</label>
-        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false, invalid: false }">
+        <div class="input-wrapper" x-data="{ input: '', isActive: false, valid: false }">
           <input
             type="text"
             class="custom-input"
@@ -485,7 +485,7 @@
             @focus="isActive = true"
             @blur="isActive = false"
           />
-          <p class="error-label" x-show="invalid === true" >error message</p>
+          <p class="error-label">error message</p>
           <div class="icon-wrapper">
             <button
               type="button"
@@ -495,7 +495,7 @@
             >
             </button>
             <i class="icon-check" x-show="valid === true"></i>
-            <i class="icon-error" x-show="invalid === true"></i>
+            <i class="icon-error"></i>
           </div>
         </div>
       </div>

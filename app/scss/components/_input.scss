@@ -14,6 +14,10 @@
   width: 20px;
   height: 20px;
 }
+.error-label,
+.icon-error {
+  display: none;
+}
 .custom-input {
   position: relative;
   width: 100%;
@@ -26,7 +30,7 @@
   transition-property: border-color;
   &:focus {
     border-color: $active-input-border;
-    + p + .icon-wrapper {
+    + .error-label + .icon-wrapper {
       .btn-clear {
         opacity: .5;
       }
@@ -34,6 +38,14 @@
   }
   &.error {
     border-color: $danger-default-color;
+    + .error-label {
+      display: block;
+      + .icon-wrapper {
+        .icon-error {
+          display: block;
+        }
+      }
+    }
   }
 }
 .error-label {

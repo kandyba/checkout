@@ -697,7 +697,7 @@
           <p class="text">Are you sure you want to confirm the payment?</p>
           <div class="button-group">
             <button type="button" class="btn btn-outline" @click.prevent="paymentConfirm = 0">No</button>
-            <button type="button" class="btn btn-primary">Yes</button>
+            <button type="button" class="btn btn-primary" @click.prevent="paymentConfirm = 0">Yes</button>
           </div>
         </div>
         <div class="overlay"></div>

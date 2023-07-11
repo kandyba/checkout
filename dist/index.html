@@ -692,49 +692,61 @@
       </div>
       <!-- End of payment error  -->
       <!-- Modal -->
-      <div class="overlay"></div>
-      <div class="modal modal-confirm">
-        <p class="text">Are you sure you want to confirm the payment?</p>
-        <div class="button-group">
-          <button type="button" class="btn btn-outline">No</button>
-          <button type="button" class="btn btn-primary">Yes</button>
+      <div class="modal-wrapper" x-show="paymentConfirm === 1">
+        <div class="modal modal-confirm">
+          <p class="text">Are you sure you want to confirm the payment?</p>
+          <div class="button-group">
+            <button type="button" class="btn btn-outline" @click.prevent="paymentConfirm = 0">No</button>
+            <button type="button" class="btn btn-primary">Yes</button>
+          </div>
         </div>
+        <div class="overlay"></div>
       </div>
       <!-- End of modal  -->
       <div class="button-group">
-      <div class="button-nav">
-        <button
-          type="button"
-          class="btn btn-secondary btn-back"
-          x-show="btnBack === 1, paymentCanceled === 0"
-          @click.prevent="bank = 0; paymentTab = 1; btnBack = 0; selectedMethod = '', selectedBank = '', isNextButtonDisabled = true"
-        >
-          Back
-        </button>
+        <div class="button-nav">
+          <button
+            type="button"
+            class="btn btn-secondary btn-back"
+            x-show="btnBack === 1, paymentCanceled === 0"
+            @click.prevent="bank = 0; paymentTab = 1; btnBack = 0; selectedMethod = '', selectedBank = '', isNextButtonDisabled = true"
+          >
+            Back
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary btn-next"
+            x-bind:disabled="isNextButtonDisabled"
+            @click="getPaymentDetail()"
+            x-show="paymentCanceled === 0"
+          >
+            Get payment detail
+          </button>
+        </div>
+        <!-- Button finish  -->
         <button
           type="button"
           class="btn btn-primary btn-next"
-          x-bind:disabled="isNextButtonDisabled"
-          @click="getPaymentDetail()"
-          x-show="paymentCanceled === 0"
+          x-show="btnFinish === 1"
+          @click.prevent="paymentConfirm = 1"
         >
-          Get payment detail
+          Finish
         </button>
-      </div>
-      <div class="show-more" x-data="{isOpen: false}">
-        <button type="button" class="btn btn-outline btn-dropdown" @click="isOpen = !isOpen"
-                :class="{ 'active': isOpen }">Payment rules
-        </button>
-        <div class="collapsible" :style="isOpen && {height: $el.scrollHeight+`px`}" :class="isOpen && 'is-open'">
-          <div class="inner">
-            <p>Welcome text</p>
-            <p><strong>Step 1: Select payment Options</strong></p>
-            <p>First off, you need to select currency.</p>
+        <!-- End of button finish -->
+        <div class="show-more" x-data="{isOpen: false}">
+          <button type="button" class="btn btn-outline btn-dropdown" @click="isOpen = !isOpen"
+                  :class="{ 'active': isOpen }">Payment rules
+          </button>
+          <div class="collapsible" :style="isOpen && {height: $el.scrollHeight+`px`}" :class="isOpen && 'is-open'">
+            <div class="inner">
+              <p>Welcome text</p>
+              <p><strong>Step 1: Select payment Options</strong></p>
+              <p>First off, you need to select currency.</p>
+            </div>
           </div>
         </div>
+        <button type="button" class="btn btn-outline btn-chat">Chat</button>
       </div>
-      <button type="button" class="btn btn-outline btn-chat">Chat</button>
-    </div>
     </div>
   </main>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"></script>
@@ -776,6 +788,8 @@
         paymentVerification: 0,
         paymentConfirmed: 0,
         paymentCanceled: 0,
+        paymentConfirm: 0,
+        btnFinish: 0,
         selectedCurrencyLabel: '',
         paymentList: [
           {

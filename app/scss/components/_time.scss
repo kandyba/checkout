@@ -2,11 +2,10 @@
 @import "../base/mixins";
 
 .time {
-  padding: 8px 12px;
+  padding: 8px 16px;
   border-radius: 8px;
   background-color: $gray-100;
-  min-width: 74px;
-  text-align: center;
+  width: 76px;
   @include respond-to-max(mobile-end) {
     font-size: 12px;
   }

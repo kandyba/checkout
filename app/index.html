@@ -682,7 +682,26 @@
       </div>
     </div>
     <!-- End of Statuses  -->
-    <div class="button-group">
+    <div>
+      <!-- Payment error -->
+      <div class="payment-error">
+        <div class="inner">
+          <i class="icon-attention"></i>
+          <p>There are no available payment details for these payment method, currency and bank.</p>
+        </div>
+      </div>
+      <!-- End of payment error  -->
+      <!-- Modal -->
+      <div class="overlay"></div>
+      <div class="modal modal-confirm">
+        <p class="text">Are you sure you want to confirm the payment?</p>
+        <div class="button-group">
+          <button type="button" class="btn btn-outline">No</button>
+          <button type="button" class="btn btn-primary">Yes</button>
+        </div>
+      </div>
+      <!-- End of modal  -->
+      <div class="button-group">
       <div class="button-nav">
         <button
           type="button"
@@ -715,6 +734,7 @@
         </div>
       </div>
       <button type="button" class="btn btn-outline btn-chat">Chat</button>
+    </div>
     </div>
   </main>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"></script>

@@ -1,0 +1,50 @@
+@import "../base/theme";
+@import "../base/mixins";
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba($black, .4);
+  z-index: 9;
+}
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 32px 24px;
+  transform: translate(-50%, -50%);
+  background-color: $white;
+  border-radius: 8px;
+  box-shadow: $primary-shadow;
+  z-index: 10;
+  &.modal-confirm {
+    width: 100%;
+    max-width: 288px;
+    @include respond-to(tablet) {
+      padding: 40px;
+      max-width: 546px;
+    }
+  }
+  .text {
+    margin-bottom: 24px;
+    text-align: center;
+    font-weight: 500;
+    @include respond-to(tablet) {
+      font-size: 18px;
+    }
+  }
+  .button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 24px;
+  }
+  .btn-outline {
+    font: {
+      size: 16px;
+      weight: 600;
+    }
+  }
+}

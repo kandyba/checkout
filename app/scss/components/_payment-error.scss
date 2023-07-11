@@ -1,0 +1,23 @@
+@import "../base/theme";
+@import "../base/mixins";
+.payment-error {
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid $danger-default-color;
+  box-shadow: $primary-shadow;
+  color: $danger-default-color;
+  @include respond-to-max(mobile-end) {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  @include respond-to(tablet) {
+    font-weight: 500;
+    line-height: 24px;
+  }
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
